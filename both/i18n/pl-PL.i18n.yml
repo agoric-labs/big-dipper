@@ -110,7 +110,7 @@ validators:
     totalMissed: 'Łącznie pominięto'
     block: 'Blok'
     missedCount: 'Liczba pominiętych'
-    iDontMiss: 'Ja nie pomijam żadnych bloków'
+    iDontMiss: 'Żadne bloki nie zostały pominięte'
     lastSyncTime: 'Ostatni czas synch'
     delegator: 'Delegujący'
     amount: 'Kwota'
