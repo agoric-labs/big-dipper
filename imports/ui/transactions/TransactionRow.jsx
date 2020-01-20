@@ -11,6 +11,8 @@ import Coin from '/both/utils/coins.js'
 import SentryBoundary from '../components/SentryBoundary.jsx';
 import { Markdown } from 'react-showdown';
 
+const T = i18n.createComponent();
+
 let showdown  = require('showdown');
 showdown.setFlavor('github');
 
@@ -32,7 +34,7 @@ export const TransactionRow = (props) => {
         <Col xs={(!props.blockList)?2:4} md={1}>{(!tx.code)?<TxIcon valid />:<TxIcon />}</Col>
         <Col xs={(!props.blockList)?6:8} md={(!props.blockList)?9:4} lg={2} className="fee"><i className="material-icons d-lg-none">monetization_on</i> {(tx.tx.value.fee.amount.length > 0)?tx.tx.value.fee.amount.map((fee,i) => {
              return <span className="text-nowrap" key={i}>{(new Coin(parseFloat(fee.amount), fee.denom)).toString(4)}</span>
-        }):<span>No fee</span>}</Col>
+        }):<span><T>transactions.noFee</T></span>}</Col>
         {(tx.code)?<Col xs={{size:12, order:"last"}} className="error">
             <Alert color="danger">
                 <CosmosErrors
