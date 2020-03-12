@@ -19,7 +19,7 @@ export default ValidatorListContainer = withTracker((props) => {
     if (props.inactive){
         validatorsCond = {
             $or: [
-                { status: { $lt : 2 } },
+                { status: { $lt : 2 + Meteor.settings.public.validatorStatus0 } },
                 { jailed: true }
             ]
         }
@@ -27,7 +27,7 @@ export default ValidatorListContainer = withTracker((props) => {
     else{
         validatorsCond = {
             jailed: false,
-            status: 2
+            status: 2 + Meteor.settings.public.validatorStatus0
         }
     }
 
