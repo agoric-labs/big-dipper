@@ -516,12 +516,12 @@ Meteor.methods({
                             try {
                                 console.log('Checking all validators against db...')
                                 let dbValidators = {}
-                                Validators.find({}, {fields: {consensus_pubkey: 1, status: 1}}
+                                Validators.find({}, {fields: {consensus_pubkey: 1, status: 1 + Meteor.settings.validatorStatus0}}
                                     ).forEach((v) => dbValidators[v.consensus_pubkey] = v.status)
                                 Object.keys(validatorSet).forEach((conPubKey) => {
                                     let validatorData = validatorSet[conPubKey];
                                     // Active validators should have been updated in previous steps
-                                    if (validatorData.status === 2)
+                                    if (validatorData.status === 2 + Meteor.settings.validatorStatus0)
                                         return
 
                                     if (dbValidators[conPubKey] == undefined) {
@@ -621,7 +621,7 @@ Meteor.methods({
 
                         if (height % 60 == 1){
                             console.log("===== calculate voting power distribution =====");
-                            let activeValidators = Validators.find({status:2,jailed:false},{sort:{voting_power:-1}}).fetch();
+                            let activeValidators = Validators.find({status:2 + Meteor.settings.validatorStatus0,jailed:false},{sort:{voting_power:-1}}).fetch();
                             let numTopTwenty = Math.ceil(activeValidators.length*0.2);
                             let numBottomEighty = activeValidators.length - numTopTwenty;
 
