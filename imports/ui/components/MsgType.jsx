@@ -49,6 +49,8 @@ export const MsgType = (props) => {
         return <Badge color="dark"><T>messageTypes.IBCTransfer</T></Badge>;
     case "cosmos-sdk/IBCReceiveMsg":
         return <Badge color="dark"><T>messageTypes.IBCReceive</T></Badge>;
+    case "swingset/DeliverInbound":
+        return <Badge color="success"><T>messageTypes.AgoricSend</T></Badge>
 
     default:
         return <Badge color="primary">{props.type}</Badge>;

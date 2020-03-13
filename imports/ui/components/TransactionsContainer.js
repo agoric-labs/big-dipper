@@ -64,7 +64,8 @@ export default TransactionsContainer = withTracker((props) => {
         IBCTxs: transactionsExist ? Transactions.find({
             $or: [
                 {"tx.value.msg.type":"cosmos-sdk/IBCTransferMsg"},
-                {"tx.value.msg.type":"cosmos-sdk/IBCReceiveMsg"}
+                {"tx.value.msg.type":"cosmos-sdk/IBCReceiveMsg"},
+                {"tx.value.msg.type":"swingset/DeliverInbound"},
             ]
         }).fetch() : {}
     };

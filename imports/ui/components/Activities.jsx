@@ -89,7 +89,12 @@ export default class Activites extends Component {
             return <MsgType type={msg.type} />
         case "cosmos-sdk/IBCReceiveMsg":
             return <MsgType type={msg.type} />
-
+        case "swingset/DeliverInbound":
+            let nmsgs = '';
+            nmsgs = msg.value.Messages ? msg.value.Messages.length : 0;
+            let via = msg.value.Peer === msg.value.Submitter ? '' : <> <T>activities.via</T> <span className="address"><Account address={msg.value.Peer} /></span></>;
+            return <p><Account address={msg.value.Submitter} /> {(this.props.invalid)?<T>activities.failedTo</T>:''}<MsgType type={msg.type} /> <em className="text-success">{nmsgs ? <>{nmsgs} <T>activities.messages</T></> : <T>activities.acknowledgement</T>}</em>{via}<T>common.fullStop</T></p>
+ 
         default:
             return <div><JSONPretty id="json-pretty" data={msg.value}></JSONPretty></div>
         }
